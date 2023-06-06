@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DEM Calibration</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="custom-styles.css">
+
+
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+/* .w3-sidebar {width: 120px;background: #222;} */
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+/* #main {margin-left: 120px} */
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+</style>
+</head>
+<body class="w3-black">
+
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+
+  <!-- Header/Home -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small">Interactive DEM Calibration using a GranuTools GranuDrum Digital Twin</h1>
+    <img id="gd_image" src="gd_images/gd_1_0_0_0_0.jpg" alt="gd" class="w3-image" width="400" height="400">
+    <img id="gd_experiment" src="gd_images/gd_50rpm_experimental.jpg" alt="gd" class="w3-image" width="400" height="400">
+
+    <!-- Sliders -->
+    <div class="w3-black">
+
+      <div class="range w3-container">
+        <input type="range" id="PSDRange" min="1" max="2" value="1" oninput="PSDValue.innerText = `PSD: ${PSDValues[this.value]}`; update_image();">
+        <span id="PSDValue">PSD: </span>
+      </div>
+
+      <div class="range w3-container">
+        <input type="range" id="RestitutionRange" oninput="RestitutionValue.innerText = `Restitution: ${RestitutionValues[this.value]}`; update_image();">
+        <span id="RestitutionValue">Restitution: </span>
+      </div>
+
+      <div class="range w3-container">
+        <input type="range" id="SlidingRange" oninput="SlidingValue.innerText = `Sliding: ${SlidingValues[this.value]}`; update_image();">
+        <span id="SlidingValue">Sliding: </span>
+      </div>
+
+      <div class="range w3-container">
+        <input type="range" id="RollingRange" oninput="RollingValue.innerText = `Rolling: ${RollingValues[this.value]}`; update_image();">
+        <span id="RollingValue">Rolling: </span>
+      </div>
+
+      <div class="range w3-container">
+        <input type="range" id="CohesionRange" oninput="CohesionValue.innerText = `Cohesion: ${CohesionValues[this.value]}`; update_image();">
+        <span id="CohesionValue">Cohesion: </span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- About Section
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey"></h2>
+    <hr style="width:200px" class="w3-opacity">
+  </div>
+  -->
+
+  <script type="text/javascript">
+    function update_image() {
+      psd = document.getElementById("PSDRange").value;
+      restitution = document.getElementById("RestitutionRange").value;
+      sliding = document.getElementById("SlidingRange").value;
+      rolling = document.getElementById("RollingRange").value;
+      cohesion = document.getElementById("CohesionRange").value;
+
+      document.getElementById("gd_image").src = `gd_images/gd_${psd}_${restitution}_${sliding}_${rolling}_${cohesion}.jpg`;
+    }
+
+    PSDValues = ["0.7 mm", "1.1 mm", "1.5 mm"];
+    document.getElementById("PSDRange").dispatchEvent(new Event('input'));
+
+    RestitutionValues = [0.1, 0.5, 0.9, 0.99];
+    document.getElementById("RestitutionRange").min = 0;
+    document.getElementById("RestitutionRange").max = RestitutionValues.length - 1;
+    document.getElementById("RestitutionRange").value = 0;
+    document.getElementById("RestitutionRange").dispatchEvent(new Event('input'));
+
+    SlidingValues = [0.15, 0.2, 0.3, 0.5, 0.8, 1.0];
+    document.getElementById("SlidingRange").min = 0;
+    document.getElementById("SlidingRange").max = SlidingValues.length - 1;
+    document.getElementById("SlidingRange").value = 0;
+    document.getElementById("SlidingRange").dispatchEvent(new Event('input'));
+
+    RollingValues = [0.0, 0.01, 0.05, 0.1, 0.2, 0.4, 0.7];
+    document.getElementById("RollingRange").min = 0;
+    document.getElementById("RollingRange").max = RollingValues.length - 1;
+    document.getElementById("RollingRange").value = 0;
+    document.getElementById("RollingRange").dispatchEvent(new Event('input'));
+
+    CohesionValues = [0, 10000, 20000, 30000, 40000, 50000, 70000];
+    document.getElementById("CohesionRange").min = 0;
+    document.getElementById("CohesionRange").max = CohesionValues.length - 1;
+    document.getElementById("CohesionRange").value = 0;
+    document.getElementById("CohesionRange").dispatchEvent(new Event('input'));
+
+  </script>
+  
+
+
+  <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <a href="https://github.com/uob-positron-imaging-centre/DigitalTwins" target="_blank"><i class="fa fa-github w3-hover-opacity"></i></a>
+
+    <p class="w3-medium">Webpage made by Andrei Leonard Nicusan in 2023. Simulations were run by Ben Jenkins on the University of Birmingham BlueBEAR HPC in partnership with Granutools Belgium. The GranuDrum digital twin was designed by Dominik Werner. The GranuDrum is a trademark of Granutools Belgium.</p>
+
+    <!--<p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>-->
+  <!-- End footer -->
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+</html>
+
