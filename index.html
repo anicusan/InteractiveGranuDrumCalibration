@@ -35,8 +35,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
   <!-- About Section -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
-    <img id="gd_image" src="gd_images/gd_1_0_0_0_0.jpg" alt="gd" class="w3-image" width="400" height="400">
-    <img id="gd_experiment" src="gd_images/gd_50rpm_experimental.jpg" alt="gd" class="w3-image" width="400" height="400">
+    <img id="gd_image" src="gd_images/gd_1_0_0_0_0.jpg" alt="gd" class="w3-image" width="45%" height="45%">
+    <img id="gd_experiment" src="gd_images/gd_50rpm_experimental.jpg" alt="gd" class="w3-image" width="45%" height="45%">
 
     <!-- Sliders -->
     <div class="w3-black">
@@ -44,26 +44,31 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       <div class="range w3-container">
         <input type="range" id="PSDRange" min="1" max="2" value="1" oninput="PSDValue.innerText = `PSD: ${PSDValues[this.value]}`; update_image();">
         <span id="PSDValue">PSD: </span>
+        <div class="sliderticks" id="PSDTicks"></div>
       </div>
 
       <div class="range w3-container">
-        <input type="range" id="RestitutionRange" oninput="RestitutionValue.innerText = `Restitution: ${RestitutionValues[this.value]}`; update_image();">
+        <input type="range" id="RestitutionRange" step="1" oninput="RestitutionValue.innerText = `Restitution: ${RestitutionValues[this.value]}`; update_image();">
         <span id="RestitutionValue">Restitution: </span>
+        <div class="sliderticks" id="RestitutionTicks"></div>
       </div>
 
       <div class="range w3-container">
-        <input type="range" id="SlidingRange" oninput="SlidingValue.innerText = `Sliding: ${SlidingValues[this.value]}`; update_image();">
+        <input type="range" id="SlidingRange" step="1" oninput="SlidingValue.innerText = `Sliding: ${SlidingValues[this.value]}`; update_image();">
         <span id="SlidingValue">Sliding: </span>
+        <div class="sliderticks" id="SlidingTicks"></div>
       </div>
 
       <div class="range w3-container">
         <input type="range" id="RollingRange" oninput="RollingValue.innerText = `Rolling: ${RollingValues[this.value]}`; update_image();">
         <span id="RollingValue">Rolling: </span>
+        <div class="sliderticks" id="RollingTicks"></div>
       </div>
 
       <div class="range w3-container">
         <input type="range" id="CohesionRange" oninput="CohesionValue.innerText = `Cohesion: ${CohesionValues[this.value]}`; update_image();">
         <span id="CohesionValue">Cohesion: </span>
+        <div class="sliderticks" id="CohesionTicks"></div>
       </div>
 
     </div>
@@ -82,30 +87,45 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
     PSDValues = ["0.7 mm", "1.1 mm", "1.5 mm"];
     document.getElementById("PSDRange").dispatchEvent(new Event('input'));
+    for (let i = 0; i < PSDValues.length - 1; i++) {
+      document.getElementById("PSDTicks").appendChild(document.createElement("p"));
+    }
 
     RestitutionValues = [0.1, 0.5, 0.9, 0.99];
     document.getElementById("RestitutionRange").min = 0;
     document.getElementById("RestitutionRange").max = RestitutionValues.length - 1;
     document.getElementById("RestitutionRange").value = 0;
     document.getElementById("RestitutionRange").dispatchEvent(new Event('input'));
+    for (let i = 0; i < RestitutionValues.length; i++) {
+      document.getElementById("RestitutionTicks").appendChild(document.createElement("p"));
+    }
 
     SlidingValues = [0.15, 0.2, 0.3, 0.5, 0.8, 1.0];
     document.getElementById("SlidingRange").min = 0;
     document.getElementById("SlidingRange").max = SlidingValues.length - 1;
     document.getElementById("SlidingRange").value = 0;
     document.getElementById("SlidingRange").dispatchEvent(new Event('input'));
+    for (let i = 0; i < SlidingValues.length; i++) {
+      document.getElementById("SlidingTicks").appendChild(document.createElement("p"));
+    }
 
     RollingValues = [0.0, 0.01, 0.05, 0.1, 0.2, 0.4, 0.7];
     document.getElementById("RollingRange").min = 0;
     document.getElementById("RollingRange").max = RollingValues.length - 1;
     document.getElementById("RollingRange").value = 0;
     document.getElementById("RollingRange").dispatchEvent(new Event('input'));
+    for (let i = 0; i < RollingValues.length; i++) {
+      document.getElementById("RollingTicks").appendChild(document.createElement("p"));
+    }
 
     CohesionValues = [0, 10000, 20000, 30000, 40000, 50000, 70000];
     document.getElementById("CohesionRange").min = 0;
     document.getElementById("CohesionRange").max = CohesionValues.length - 1;
     document.getElementById("CohesionRange").value = 0;
     document.getElementById("CohesionRange").dispatchEvent(new Event('input'));
+    for (let i = 0; i < CohesionValues.length; i++) {
+      document.getElementById("CohesionTicks").appendChild(document.createElement("p"));
+    }
 
   </script>
   

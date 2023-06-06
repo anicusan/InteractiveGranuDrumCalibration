@@ -34,3 +34,25 @@
 	top:50%;
 	transform:translateY(-50%) rotate(-90deg);
 }
+
+
+
+.sliderticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-radius:5px;
+  width:70%;
+}
+
+.sliderticks p {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 1px;
+  background: #D3D3D3;
+  height: 10px;
+  line-height: 40px;
+  margin: 0 0 20px 0;
+}
